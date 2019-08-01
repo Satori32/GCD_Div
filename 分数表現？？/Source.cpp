@@ -38,18 +38,18 @@ int main() {
 	//auto [A, B] = GetInput();
 
 
-	std::minstd_rand mr(0);
+	std::random_device rd;
+	std::mt19937 mt(rd());
+	//std::minstd_rand mr(rd());
 	std::uniform_int_distribution<>  UI(2, 1024);
 
 	for (std::size_t i = 0; i < 128; i++) {
-		auto A = UI(mr);
-		auto B = UI(mr);
+		//auto A = UI(mr);
+		//auto B = UI(mr);
+		auto A = UI(mt);
+		auto B = UI(mt);
 		auto [C, D] = MakeHoge(A, B);
-		std::cout <<A<<','<<B<<':'<< "it's[" << C << '/' << D << "]" << std::endl;
-
-		if (C / D == C / (double)D) {
-			std::cout << "TRUE:" << C / D << std::endl;
-		}
+		std::cout <<A<<','<<B<<':'<< " \tit's[" << C << '/' << D << "]\t[" <<C/static_cast<double>(D)<<"]"<< std::endl;
 	}
 
 	return 0;
